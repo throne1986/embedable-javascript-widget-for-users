@@ -9,6 +9,7 @@ export function show(text) {
     let temporary = document.createElement('div');
     temporary.innerHTML = html;
     temporary.getElementsByClassName('js-widget-dialog')[0].textContent = text;
+    console.log("test" + temporary);
 
     // append elements to body
     body = document.getElementsByTagName('body')[0];

@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 var copyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const bundleOutputDir = './dist';
 
 module.exports = (env) => {
@@ -8,9 +11,19 @@ module.exports = (env) => {
 
     return [{
         entry: './src/main.js',
+        plugins: [
+            // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+            new CleanWebpackPlugin(),
+            new HtmlWebpackPlugin({
+             title: 'Output Management',
+             title: 'Caching',
+            })
+        ],
         output: {
             filename: 'widget.js',
-            path: path.resolve(bundleOutputDir),
+            filename: 'widget.[contenthash].js',
+            // path: path.resolve(bundleOutputDir),      
+            path: path.resolve(__dirname, 'dist')
         },
         devServer: {
             contentBase: bundleOutputDir

@@ -11,7 +11,8 @@ function app(window) {
 
     // set default configurations
     let configurations = {
-        someDefaultConfiguration: false
+        someDefaultConfiguration: false,
+        app_id: false
     };
 
     // all methods that were called till now and stored in queue
