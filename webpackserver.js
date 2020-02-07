@@ -6,32 +6,32 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const bundleOutputDir = './dist';
 
-usersIdArray = ['userId1', 'userId2'];
+const usersIdArray = ['userId1', 'userId2'];
 
-webpackConfig = userIdArray.map(someUserSpecificId => ({
+const webpackConfig = usersIdArray.map(someUserSpecificId => {
 
-    
-    return {
-        entry: './src/main.js',
-        plugins: [
+module.exports = (env) => {
+const isDevBuild = !(env && env.prod);
+  return {
+    entry: './src/main.js',
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+         title: 'Output Management',
+         title: 'Caching',
+        })
+    ],
+    output: {
+      filename: `widget.${someUserSpecificId}.js`,
+      path: path.resolve(bundleOutputDir),
+    },
+    devServer: {
+        contentBase: bundleOutputDir
+    },
+    plugins: isDevBuild
+        ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin([{ from: 'demo/' }])]
+        : [new webpack.optimize.UglifyJsPlugin()],
 
-            new CleanWebpackPlugin(),
-            new HtmlWebpackPlugin({
-             title: 'Output Management',
-             title: 'Caching',
-            })
-        ],
-        output: {
-   
-            filename: `widget.${someUserSpecificId}.js`,
-            path: path.resolve(bundleOutputDir),      
-        },
-        devServer: {
-            contentBase: bundleOutputDir
-        },
-        plugins: isDevBuild
-            ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin([{ from: 'demo/' }])]
-            : [new webpack.optimize.UglifyJsPlugin()],
         module: {
             rules: [
                 { test: /\.html$/i, use: 'html-loader' },
@@ -50,5 +50,8 @@ webpackConfig = userIdArray.map(someUserSpecificId => ({
                 }
             ]
         }
-    }
-}))
+      };
+  };
+});
+
+module.exports = webpackConfig;
