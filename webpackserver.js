@@ -6,13 +6,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const bundleOutputDir = './dist';
 
-module.exports = (env) => {
-    const isDevBuild = !(env && env.prod);
+usersIdArray = ['userId1', 'userId2'];
 
-    return [{
+webpackConfig = userIdArray.map(someUserSpecificId => ({
+
+    
+    return {
         entry: './src/main.js',
         plugins: [
-            // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
              title: 'Output Management',
@@ -21,7 +23,7 @@ module.exports = (env) => {
         ],
         output: {
    
-            filename: 'widget.[contenthash].js',
+            filename: `widget.${someUserSpecificId}.js`,
             path: path.resolve(bundleOutputDir),      
         },
         devServer: {
@@ -48,5 +50,5 @@ module.exports = (env) => {
                 }
             ]
         }
-    }];
-};
+    }
+}))

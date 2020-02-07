@@ -1,21 +1,21 @@
 .js-widget-overlay{
 position:absolute;
-bottom: 0px;
-right: 0px;
+top: 0px;
+left: 0px;
 }
 .js-widget-dialog{
     position: fixed;
     z-index: 10002;
-    background: #fff;
+    background: blue;
     left: 50%;
     top: 30%;
     margin: 0 0 0 -120px;
     width:auto;
     padding: 10px 20px;
-    border: solid 1px #333
+    border: solid 1px green
 }
 
 video{
-    width: 600px;
-    height: 400px;
+    width: 800px;
+    height: 500px;
 }
