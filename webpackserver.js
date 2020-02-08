@@ -9,8 +9,9 @@ const bundleOutputDir = './dist';
 const usersIdArray = ['userId1', 'userId2'];
 
 const webpackConfig = usersIdArray.map(someUserSpecificId => {
-
-module.exports = (env) => {
+  // in ths case we will need return because you are not doing it like `=> ({`
+  // and don't need module.exports here only export your webpackConfig
+return (env) => {
 const isDevBuild = !(env && env.prod);
   return {
     entry: './src/main.js',
